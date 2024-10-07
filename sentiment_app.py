@@ -40,8 +40,10 @@ if st.button("Analyze Sentiment"):
             st.success("😊 Positive")
         elif prediction[0] == "Negative":
             st.error("😠 Negative")
+        elif prediction[0] == "Neutral":
+            st.warning("😐 Neutral")
         else:
-            st.warning("😐 Neutral") 
+            st.warning("Irrelevant")
 
 # File upload for batch sentiment analysis
 uploaded_file = st.file_uploader("Upload a CSV file for batch sentiment analysis", type=["csv"])
@@ -73,7 +75,7 @@ if uploaded_file is not None:
         # Sentiment distribution chart
         sentiment_counts = data['Sentiment'].value_counts()
         fig, ax = plt.subplots()
-        sentiment_counts.plot(kind='bar', ax=ax, color=['green', 'red', 'gray'])
+        sentiment_counts.plot(kind='bar', ax=ax, color=['green', 'red', 'gray', 'blue'])
         ax.set_title("Sentiment Distribution")
         st.pyplot(fig)
 
@@ -87,12 +89,14 @@ if uploaded_file is not None:
         positive_count = sum(data['Sentiment'] == "Positive")
         neutral_count = sum(data['Sentiment'] == "Neutral")
         negative_count = sum(data['Sentiment'] == "Negative")
-
+        irrelevant_count = sum(data['Sentiment'] == "Irrelevant")
+        
         st.write("### Summary:")
         st.write(f"Total texts analyzed: {len(data)}")
         st.write(f"Positive: {positive_count}")
         st.write(f"Neutral: {neutral_count}")
         st.write(f"Negative: {negative_count}")
+        st.write(f"Irrelevant: {irrelevant_count}")
     else:
         st.error(f"The uploaded file doesn't have the correct columns. Expected: {expected_columns}, but got: {data.columns.tolist()}")
 

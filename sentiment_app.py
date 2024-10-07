@@ -7,8 +7,8 @@ from wordcloud import WordCloud
 
 
 # Load your trained model
-model = pickle.load(open('D:\Data science\Final Project\data\svm_model.pkl', 'rb'))
-tfidf_vectorizer = pickle.load(open('D:\Data science\Final Project\data\TFIDF_model.pkl', 'rb'))  # Load vectorizer
+model = pickle.load(open('svm_model.pkl', 'rb'))
+tfidf_vectorizer = pickle.load(open('TFIDF_model.pkl', 'rb'))  # Load vectorizer
 
 # Page configuration
 st.set_page_config(page_title="Sentiment Analysis App", layout="wide", initial_sidebar_state="expanded")
